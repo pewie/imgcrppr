@@ -190,22 +190,15 @@
 		},
 
 		_makeDraggable: function() {
-			var self = this;
-
-			$('#imgcrppr-front-image').draggable({
-
-				cursor: "crosshair",
-				axis: this.options.axis,
-
-				start: function(e, ui) {
-					var dragged = $('#imgcrppr-back-image'),
-						x = dragged.offset().left - e.pageX,
-						y = dragged.offset().top - e.pageY;
+			var self = this,
+				startDrag = function(draggable, e, ui) {
+					var x = draggable.offset().left - e.pageX,
+						y = draggable.offset().top - e.pageY;
 
 					$(window)
 						.on('mousemove.draggable touchmove.draggable', function(e) {
 
-							dragged
+							draggable
 								.css({
 									'bottom': 'auto',
 									'right': 'auto'
@@ -228,13 +221,29 @@
 								});
 
 							e.preventDefault();
-						})
-				},
+						});
+				};
 
+			$('#imgcrppr-back-image').draggable({
+				cursor: "crosshair",
+				axis: this.options.axis,
+				start: function(e, ui) {
+					startDrag($('#imgcrppr-front-image'), e, ui);
+				},
 				stop: function(e, ui) {
 					$(window).off('mousemove.draggable touchmove.draggable click.draggable');
-				},
+				}
+			});
 
+			$('#imgcrppr-front-image').draggable({
+				cursor: "crosshair",
+				axis: this.options.axis,
+				start: function(e, ui) {
+					startDrag($('#imgcrppr-back-image'), e, ui);
+				},
+				stop: function(e, ui) {
+					$(window).off('mousemove.draggable touchmove.draggable click.draggable');
+				}
 			});
 		},
 
