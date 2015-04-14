@@ -50,6 +50,14 @@
 	font-size: 20px;
 }
 
+#slider {
+	margin-bottom: 10px;
+}
+
+.btn {
+	margin-right: 10px;
+}
+
 /* Page layout */
 h1 {
 	text-align: center;
