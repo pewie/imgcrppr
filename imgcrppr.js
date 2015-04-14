@@ -9,7 +9,7 @@
 			canvas_height: 300,
 			inner_width: 300,
 			inner_height: 300,
-			axis: 'x',
+			axis: false,
 			max_zoom_level: 2,
 			callback: function(data) {
 				console.log(data);
