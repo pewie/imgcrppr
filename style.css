@@ -1,0 +1,57 @@
+#imgcrppr {
+	width: 600px;
+	margin: 0 auto;
+
+}
+#imgcrppr-canvas {
+	height: 400px;
+	width: 600px;
+	margin: 0 auto;
+	background-color: white;
+	overflow: hidden;
+}
+#imgcrppr-back-container {
+	position: absolute;
+	max-width: 100%;
+	max-height: 100%;
+	background-repeat: no-repeat;
+	opacity: 0.5;
+	overflow: hidden; 
+}
+#imgcrppr-front-container {
+	position: relative;
+	overflow: hidden;
+	max-width: 100%;
+	max-height: 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-color: lightgrey;
+}
+
+#imgcrppr-back-image {
+	position: relative;
+	transform-origin: 50% 50%;
+}
+
+#imgcrppr-front-image {
+	position: relative;
+	top: 0;
+	left: 0;
+	width: 100%;
+	transform-origin: 50% 50%;
+}
+#imgcrppr-controls {
+	width: 300px;
+	margin: 20px auto;
+}
+
+#imgcrppr-not-found {
+	text-align: center;
+	font-size: 20px;
+}
+
+/* Page layout */
+h1 {
+	text-align: center;
+	margin-bottom: 40px;
+}
