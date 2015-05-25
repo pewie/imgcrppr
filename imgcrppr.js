@@ -17,7 +17,7 @@
 			custom_controls: false,
 			controls: {
 				parent: '#imgcrppr',
-				container: '#ic-controls',
+				container: 'ic-controls', // id of container.
 				zoom: false,
 				rotate: false,
 				reset: false
