@@ -72,7 +72,7 @@
 				"</div>");
 
 			if ( ! this.options.custom_controls) {
-				$('#imgcrppr').append("<div id='imgcrppr-controls'>"+
+				$('#imgcrppr').append("<div id='ic-controls'>"+
 						"<div id='ic-slider'></div>"+
 						"<button type='button' id='ic-btn-rotate'>Rotate</button>"+
 						"<button type='button' id='ic-btn-reset'>Reset</button>"+
