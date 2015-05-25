@@ -13,6 +13,14 @@
 			max_zoom_level: 2,
 			callback: function(data) {
 				console.log(data);
+			},
+			custom_controls: false,
+			controls: {
+				parent: '#imgcrppr',
+				container: '#ic-controls',
+				zoom: false,
+				rotate: false,
+				reset: false
 			}
 		},
 
@@ -47,28 +55,42 @@
 				})
 				.fail(function() {
 					console.log("Image not found");
-					$('#imgcrppr').html("<div id='imgcrppr-canvas'><div id='imgcrppr-not-found'>Could not load image :(</div></div>");
+					$('#imgcrppr').html("<div id='ic-canvas'><div id='ic-not-found'>Could not load image :(</div></div>");
 				});
 		},
 
 		_addElements: function() {
 			var imgcrppr = $('#imgcrppr');
 
-			$('#imgcrppr').append("<div id='imgcrppr-canvas'>"+
-					"<div id='imgcrppr-back-container' class='draggable'>"+
-						"<img id='imgcrppr-back-image' class='ui-widget-content draggable' />"+
+			$('#imgcrppr').append("<div id='ic-canvas'>"+
+					"<div id='ic-back-container' class='draggable'>"+
+						"<img id='ic-back-image' class='ui-widget-content draggable' />"+
 					"</div>"+
-					"<div id='imgcrppr-front-container' class='clearfix inner-border'>"+
-						"<img id='imgcrppr-front-image' class='ui-widget-content draggable' />"+
+					"<div id='ic-front-container' class='clearfix inner-border'>"+
+						"<img id='ic-front-image' class='ui-widget-content draggable' />"+
 					"</div>"+
 				"</div>");
 
-			$('#imgcrppr').append("<div id='imgcrppr-controls'>"+
-					"<div id='slider'></div>"+
-					"<button type='button' id='btn-rotate' class='btn btn-primary'>Rotate</button>"+
-					"<button type='button' id='btn-reset' class='btn btn-primary'>Reset</button>"+
-					"<button type='button' id='btn-crop' class='btn btn-primary'>Crop and Save</button>"+
-				"</div>");
+			if ( ! this.options.custom_controls) {
+				$('#imgcrppr').append("<div id='ic-controls'>"+
+						"<div id='ic-slider'></div>"+
+						"<button type='button' id='ic-btn-rotate'>Rotate</button>"+
+						"<button type='button' id='ic-btn-reset'>Reset</button>"+
+						"<button type='button' id='ic-btn-crop'>Crop and Save</button>"+
+					"</div>");
+			} else {
+				var coptions = this.options.controls;
+				var controls = "<div id='" + coptions.container + "'>";
+
+				if (coptions.zoom) { controls += coptions.zoom; }
+				if (coptions.rotate) { controls += coptions.rotate; }
+				if (coptions.reset) { controls += coptions.reset; }
+				if (coptions.crop) { controls += coptions.crop; }
+
+				controls += '</div';
+
+				$(coptions.parent).append(controls);
+			}
 		},
 
 		_rotate: function(angle) {
@@ -99,7 +121,7 @@
 				this.transform_values.scale = scale;
 			}
 
-			$('#imgcrppr-front-image').css({
+			$('#ic-front-image').css({
 				'-webkit-transform' : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
 				'-moz-transform'    : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
 				'-ms-transform'     : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
@@ -107,7 +129,7 @@
 				'transform'         : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)'
 			});
 
-			$('#imgcrppr-back-image').css({
+			$('#ic-back-image').css({
 				'-webkit-transform' : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
 				'-moz-transform'    : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
 				'-ms-transform'     : 'scale(' + scale + ')' + ' rotate(' + angle + 'deg)',
@@ -128,30 +150,30 @@
 				ratio = this.img_dimensions.ratio,
 				size = img_height + 'px ' + img_height * ratio + 'px';
 
-			$('#imgcrppr-canvas').css('width', canvas_width);
-			$('#imgcrppr-canvas').css('height', canvas_height);
+			$('#ic-canvas').css('width', canvas_width);
+			$('#ic-canvas').css('height', canvas_height);
 
 
-			$('#imgcrppr-back-image').css('width', canvas_width + 'px');
-			$('#imgcrppr-back-image').css('height', canvas_width * ratio + 'px');
+			$('#ic-back-image').css('width', canvas_width + 'px');
+			$('#ic-back-image').css('height', canvas_width * ratio + 'px');
 
-			$('#imgcrppr-front-image').css('width', img_height + 'px');
-			$('#imgcrppr-front-image').css('height', img_height * ratio + 'px');
+			$('#ic-front-image').css('width', img_height + 'px');
+			$('#ic-front-image').css('height', img_height * ratio + 'px');
 
-			$('#imgcrppr-front-container').css('width', inner_width + 'px');
-			$('#imgcrppr-front-container').css('height', inner_height + 'px');
+			$('#ic-front-container').css('width', inner_width + 'px');
+			$('#ic-front-container').css('height', inner_height + 'px');
 
-			$('#imgcrppr-back-container').css('width', canvas_width + 'px');
-			$('#imgcrppr-back-container').css('height', canvas_height + 'px');
+			$('#ic-back-container').css('width', canvas_width + 'px');
+			$('#ic-back-container').css('height', canvas_height + 'px');
 
-			$('#imgcrppr-front-image').attr('src', this.img.src);
-			$('#imgcrppr-back-image').attr('src', this.img.src);
+			$('#ic-front-image').attr('src', this.img.src);
+			$('#ic-back-image').attr('src', this.img.src);
 
 			this._makeDraggable();
 			this._makeButtonsClickable();
 
 			// Create the slider. 
-			$( "#slider" ).slider({
+			$("#ic-slider").slider({
 				min: img_height,
 				max: img_height * this.options.max_zoom_level,
 				value: img_height,
@@ -175,16 +197,16 @@
 		_makeButtonsClickable: function() {
 			var self = this;
 
-			$('#btn-reset').click(function() {
+			$('#ic-btn-reset').click(function() {
 				self._moveToOrigin();
 				self._rotate();
 			});
 
-			$('#btn-rotate').click(function() {
+			$('#ic-btn-rotate').click(function() {
 				self._rotate(90);
 			});
 
-			$('#btn-crop').click(function() {
+			$('#ic-btn-crop').click(function() {
 				self._callback();
 			});
 		},
@@ -224,22 +246,22 @@
 						});
 				};
 
-			$('#imgcrppr-back-image').draggable({
+			$('#ic-back-image').draggable({
 				cursor: "crosshair",
 				axis: this.options.axis,
 				start: function(e, ui) {
-					startDrag($('#imgcrppr-front-image'), e, ui);
+					startDrag($('#ic-front-image'), e, ui);
 				},
 				stop: function(e, ui) {
 					$(window).off('mousemove.draggable touchmove.draggable click.draggable');
 				}
 			});
 
-			$('#imgcrppr-front-image').draggable({
+			$('#ic-front-image').draggable({
 				cursor: "crosshair",
 				axis: this.options.axis,
 				start: function(e, ui) {
-					startDrag($('#imgcrppr-back-image'), e, ui);
+					startDrag($('#ic-back-image'), e, ui);
 				},
 				stop: function(e, ui) {
 					$(window).off('mousemove.draggable touchmove.draggable click.draggable');
@@ -263,10 +285,10 @@
 			var height = this.options.image_height,
 				ratio = this.img_dimensions.ratio;
 
-			$('#imgcrppr-back-image').css('width', height * ratio + 'px');
-			$('#imgcrppr-back-image').css('height', height + 'px');
-			$('#imgcrppr-front-image').css('width', height * ratio + 'px');
-			$('#imgcrppr-front-image').css('height', height + 'px');
+			$('#ic-back-image').css('width', height * ratio + 'px');
+			$('#ic-back-image').css('height', height + 'px');
+			$('#ic-front-image').css('width', height * ratio + 'px');
+			$('#ic-front-image').css('height', height + 'px');
 		},
 
 		_moveToOrigin: function() {
@@ -274,11 +296,11 @@
 				image_height = this.options.image_height,
 				image_width = this.options.image_height * ratio,
 
-				canvas_width = $('#imgcrppr-canvas').width(),
-				canvas_height = $('#imgcrppr-canvas').height(),
+				canvas_width = $('#ic-canvas').width(),
+				canvas_height = $('#ic-canvas').height(),
 
-				front_container_height = $('#imgcrppr-front-container').height(),
-				front_container_width = $('#imgcrppr-front-container').width(),
+				front_container_height = $('#ic-front-container').height(),
+				front_container_width = $('#ic-front-container').width(),
 
 				img_canvas_width_diff = (image_width - canvas_width) / 2,
 				img_canvas_height = (image_width / ratio - canvas_height) / 2,
@@ -292,14 +314,14 @@
 				front_container_left_pos = (canvas_width - front_container_width) /2,
 				front_container_top_pos = (canvas_height - front_container_height) / 2;
 
-			$('#imgcrppr-front-image').css('left', img_left_pos + 'px');
-			$('#imgcrppr-front-image').css('top', img_top_pos + 'px');
+			$('#ic-front-image').css('left', img_left_pos + 'px');
+			$('#ic-front-image').css('top', img_top_pos + 'px');
 
-			$('#imgcrppr-back-image').css('left', -img_canvas_width_diff + 'px');
-			$('#imgcrppr-back-image').css('top',  -img_canvas_height + 'px');
+			$('#ic-back-image').css('left', -img_canvas_width_diff + 'px');
+			$('#ic-back-image').css('top',  -img_canvas_height + 'px');
 
-			$('#imgcrppr-front-container').css('left', front_container_left_pos + 'px');
-			$('#imgcrppr-front-container').css('top', front_container_top_pos + 'px');
+			$('#ic-front-container').css('left', front_container_left_pos + 'px');
+			$('#ic-front-container').css('top', front_container_top_pos + 'px');
 
 		},
 
@@ -314,16 +336,16 @@
 				img_height = this.options.image_height,
 				img_width = this.options.image_height * ratio,
 
-				canvas_width = $('#imgcrppr-canvas').width(),
-				canvas_height = $('#imgcrppr-canvas').height(),
+				canvas_width = $('#ic-canvas').width(),
+				canvas_height = $('#ic-canvas').height(),
 
-				front_container_height = $('#imgcrppr-front-container').height(),
-				front_container_width = $('#imgcrppr-front-container').width(),
+				front_container_height = $('#ic-front-container').height(),
+				front_container_width = $('#ic-front-container').width(),
 
-				outer_img_rect = $('#imgcrppr-back-image')[0].getBoundingClientRect(),
+				outer_img_rect = $('#ic-back-image')[0].getBoundingClientRect(),
 
-				outer_img_left = parseInt($('#imgcrppr-back-image').css('left'), 10),
-				outer_img_top = parseInt($('#imgcrppr-back-image').css('top'), 10);
+				outer_img_left = parseInt($('#ic-back-image').css('left'), 10),
+				outer_img_top = parseInt($('#ic-back-image').css('top'), 10);
 
 			x_value = (canvas_width - front_container_width) / 2 - outer_img_left;
 			y_value = (canvas_height - front_container_height) / 2 - outer_img_top;

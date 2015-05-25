@@ -4,7 +4,7 @@
 
 }
 
-#imgcrppr-canvas {
+#ic-canvas {
 	height: 400px;
 	width: 600px;
 	margin: 0 auto;
@@ -12,7 +12,7 @@
 	overflow: hidden;
 }
 
-#imgcrppr-back-container {
+#ic-back-container {
 	position: absolute;
 	max-width: 100%;
 	max-height: 100%;
@@ -21,7 +21,7 @@
 	overflow: hidden; 
 }
 
-#imgcrppr-front-container {
+#ic-front-container {
 	position: relative;
 	overflow: hidden;
 	max-width: 100%;
@@ -31,12 +31,12 @@
 	background-color: lightgrey;
 }
 
-#imgcrppr-back-image {
+#ic-back-image {
 	position: relative;
 	transform-origin: 50% 50%;
 }
 
-#imgcrppr-front-image {
+#ic-front-image {
 	position: relative;
 	top: 0;
 	left: 0;
@@ -44,20 +44,45 @@
 	transform-origin: 50% 50%;
 }
 
-#imgcrppr-controls {
-	width: 300px;
+#ic-controls {
+	width: 350px;
 	margin: 20px auto 0 auto;
 }
 
-#imgcrppr-not-found {
+#ic-controls #ic-slider {
+	margin-bottom: 10px;
+}
+
+#ic-controls button {
+	font-family: inherit;
+	font-size: 100%;
+	padding: .2em 0.8em;
+	color: #444;
+	color: rgba(0,0,0,.8);
+	border: 1px solid #999;
+	border: 0 rgba(0,0,0,0);
+	background-color: #E6E6E6;
+	text-decoration: none;
+	border-radius: 6px;
+	margin: 4px;
+}
+
+#ic-controls #ic-btn-crop {
+	color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	background: rgb(28, 184, 65);
+}
+
+#ic-not-found {
 	text-align: center;
 	font-size: 20px;
 }
 
-#imgcrppr-controls #slider {
+#ic-controls #slider {
 	margin-bottom: 10px;
 }
 
-#imgcrppr-controls .btn {
+#ic-controls .btn {
 	margin-right: 10px;
 }
