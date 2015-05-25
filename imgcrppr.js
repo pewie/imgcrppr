@@ -13,6 +13,14 @@
 			max_zoom_level: 2,
 			callback: function(data) {
 				console.log(data);
+			},
+			custom_controls: false,
+			controls: {
+				parent: '#imgcrppr',
+				container: '#ic-controls',
+				zoom: false,
+				rotate: false,
+				reset: false
 			}
 		},
 
@@ -63,12 +71,26 @@
 					"</div>"+
 				"</div>");
 
-			$('#imgcrppr').append("<div id='imgcrppr-controls'>"+
-					"<div id='slider'></div>"+
-					"<button type='button' id='btn-rotate' class='btn btn-primary'>Rotate</button>"+
-					"<button type='button' id='btn-reset' class='btn btn-primary'>Reset</button>"+
-					"<button type='button' id='btn-crop' class='btn btn-primary'>Crop and Save</button>"+
-				"</div>");
+			if ( ! this.options.custom_controls) {
+				$('#imgcrppr').append("<div id='imgcrppr-controls'>"+
+						"<div id='slider'></div>"+
+						"<button type='button' id='btn-rotate' class='btn btn-primary'>Rotate</button>"+
+						"<button type='button' id='btn-reset' class='btn btn-primary'>Reset</button>"+
+						"<button type='button' id='btn-crop' class='btn btn-primary'>Crop and Save</button>"+
+					"</div>");
+			} else {
+				var coptions = this.options.controls;
+				var controls = "<div id='" + coptions.container + "'>";
+
+				if (coptions.zoom) { controls += coptions.zoom; }
+				if (coptions.rotate) { controls += coptions.rotate; }
+				if (coptions.reset) { controls += coptions.reset; }
+				if (coptions.crop) { controls += coptions.crop; }
+
+				controls += '</div';
+
+				$(coptions.parent).append(controls);
+			}
 		},
 
 		_rotate: function(angle) {
