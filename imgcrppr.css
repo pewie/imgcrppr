@@ -45,8 +45,33 @@
 }
 
 #ic-controls {
-	width: 300px;
+	width: 350px;
 	margin: 20px auto 0 auto;
+}
+
+#ic-controls #ic-slider {
+	margin-bottom: 10px;
+}
+
+#ic-controls button {
+	font-family: inherit;
+	font-size: 100%;
+	padding: .2em 0.8em;
+	color: #444;
+	color: rgba(0,0,0,.8);
+	border: 1px solid #999;
+	border: 0 rgba(0,0,0,0);
+	background-color: #E6E6E6;
+	text-decoration: none;
+	border-radius: 6px;
+	margin: 4px;
+}
+
+#ic-controls #ic-btn-crop {
+	color: white;
+    border-radius: 4px;
+    text-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
+	background: rgb(28, 184, 65);
 }
 
 #ic-not-found {
