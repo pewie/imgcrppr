@@ -203,6 +203,9 @@
 			$('#ic-btn-reset').click(function() {
 				self._moveToOrigin();
 				self._rotate();
+				self._setTransform({scale: 1});
+				$('#ic-slider').slider('value', self.options.image_height);
+
 			});
 
 			$('#ic-btn-rotate').click(function() {
