@@ -21,7 +21,8 @@
 				zoom: false,
 				rotate: false,
 				reset: false
-			}
+			},
+			opacity: 0.5
 		},
 
 		_create: function() {
@@ -165,9 +166,11 @@
 
 			$('#ic-back-container').css('width', canvas_width + 'px');
 			$('#ic-back-container').css('height', canvas_height + 'px');
+			$('#ic-back-container').css('opacity', this.options.opacity);
 
 			$('#ic-front-image').attr('src', this.img.src);
 			$('#ic-back-image').attr('src', this.img.src);
+
 
 			this._makeDraggable();
 			this._makeButtonsClickable();
