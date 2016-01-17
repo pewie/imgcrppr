@@ -34,6 +34,8 @@
 #ic-back-image {
 	position: relative;
 	transform-origin: 50% 50%;
+	max-width: none;
+	max-height: none;
 }
 
 #ic-front-image {
@@ -42,6 +44,8 @@
 	left: 0;
 	width: 100%;
 	transform-origin: 50% 50%;
+	max-width: none;
+	max-height: none;
 }
 
 #ic-controls {
