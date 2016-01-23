@@ -18,7 +18,7 @@
 	max-height: 100%;
 	background-repeat: no-repeat;
 	opacity: 0.5;
-	overflow: hidden; 
+	overflow: hidden;
 }
 
 #ic-front-container {
@@ -55,6 +55,34 @@
 
 #ic-controls #ic-slider {
 	margin-bottom: 10px;
+	border: 1px solid #eeeeee;
+    background-color: #FFFFFF;
+    height: .8rem;
+    font-size: 1.1rem;
+    position: relative;
+    text-align: left;
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+#ic-slider .ui-slider-handle {
+	border: 1px solid #d8dcdf;
+	background-color: #eeeeee;
+	top: -.3em;
+	margin-left: -.6em;
+	position: absolute;
+	z-index: 2;
+	width: 1.2em;
+	height: 1.2em;
+	cursor: default;
+	-ms-touch-action: none;
+	touch-action: none;
+	border-bottom-right-radius: 6px;
+	border-bottom-left-radius: 6px;
+	border-top-right-radius: 6px;
+	border-top-left-radius: 6px;
 }
 
 #ic-controls button {
